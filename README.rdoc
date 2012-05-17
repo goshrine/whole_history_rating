@@ -1,0 +1,14 @@
+= Whole History Rating
+
+A system for ranking Go players, based on Rémi Coulom's Whole History Rating algorithm. 
+
+* Developed for use on GoShrine (http://goshrine.com)
+
+== INSTALL:
+
+* gem install whole-history-rating
+
+== USE:
+
+
+
