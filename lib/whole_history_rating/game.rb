@@ -9,7 +9,7 @@ module WholeHistoryRating
       @winner = winner
       @extras = extras
       @handicap = handicap || 0
-      @handicap_proc = handicap if handicap.is_a?(Proc)
+      @handicap_proc = handicap.is_a?(Proc) ? handicap : nil
     end
   
     def opponents_adjusted_gamma(player)

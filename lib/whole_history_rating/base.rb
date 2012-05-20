@@ -41,19 +41,19 @@ module WholeHistoryRating
     end
     
     def create_game(options)
-      if options['date'].nil?
-        puts "Skipping (game missing date) #{options.inspect}"
-        return nil
+      %w(date white black winner).each do |attr|
+        if options[attr].nil?
+          raise "Invalid game (missing #{attr}): #{options.inspect}"
+        end
       end
-      
-      @start_date ||= options['date']
-    
+          
       # Avoid self-played games (no info)
       if options['white'] == options['black']
-        puts "Skipping (black player == white player ?) #{options.inspect}"
+        raise "Invalid game (black player == white player): #{options.inspect}"
         return nil
       end
     
+      @start_date ||= options['date']
       day_num = (options['date'] - @start_date).to_i
     
       white_player = player_by_name(options['white'])
