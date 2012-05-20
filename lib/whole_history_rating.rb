@@ -2,7 +2,7 @@ require 'rubygems'
 
 module WholeHistoryRating
 
-  VERSION = "0.1.1"
+  VERSION = "0.1.2"
 
   STDOUT.sync = true
 

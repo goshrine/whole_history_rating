@@ -43,7 +43,7 @@ module WholeHistoryRating
       player.days.map {|d| [d.day, d.elo.round, (d.uncertainty*100).round]}
     end
     
-    def create_game(black, white, winner, time_step, handicap, extras = {})
+    def setup_game(black, white, winner, time_step, handicap, extras = {})
           
       # Avoid self-played games (no info)
       if black == white
@@ -55,6 +55,11 @@ module WholeHistoryRating
       black_player = player_by_name(black)
       game = Game.new(black_player, white_player, winner, time_step, handicap, extras)
       game
+    end
+    
+    def create_game(black, white, winner, time_step, handicap, extras = {})
+      game = setup_game(black, white, winner, time_step, handicap, extras)
+      add_game(game)
     end
   
     def add_game(game)
