@@ -27,8 +27,14 @@ Usage
     @whr.iterate(50)
     
     # Results are stored in one triplet for each day: [day_number, elo_rating, uncertainty]
-    @whr.ratings_for_player("shusaku") => [[1, -92, 71], [2, -94, 71], [3, -95, 71], [4, -96, 72]]
-    @whr.ratings_for_player("shusai") => [[1, 92, 71], [2, 94, 71], [3, 95, 71], [4, 96, 72]]
+    @whr.ratings_for_player("shusaku") => 
+      [[1, -43, 84], 
+       [2, -45, 84], 
+       [3, -45, 84]]
+    @whr.ratings_for_player("shusai") => 
+      [[1, 43, 84], 
+       [2, 45, 84], 
+       [3, 45, 84]]
 
 Enjoy!
 

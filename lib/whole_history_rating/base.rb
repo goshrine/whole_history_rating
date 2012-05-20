@@ -76,7 +76,8 @@ module WholeHistoryRating
       count.times { run_one_iteration }
       players.each do |name,player|
         player.update_uncertainty
-      end     
+      end 
+      nil    
     end
   
     def run_one_iteration
