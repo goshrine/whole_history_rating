@@ -1,11 +1,11 @@
 module WholeHistoryRating
   class Game
-    attr_accessor :day, :date, :white_player, :black_player, :handicap, :winner, :wpd, :bpd, :extras
+    attr_accessor :day, :white_player, :black_player, :handicap, :winner, :wpd, :bpd, :extras
   
-    def initialize(day, white_player, black_player, winner, handicap, extras)
-      @day = day
-      @white_player = white_player
-      @black_player = black_player
+    def initialize(black, white, winner, time_step, handicap, extras)
+      @day = time_step
+      @white_player = white
+      @black_player = black
       @winner = winner
       @extras = extras
       @handicap = handicap || 0

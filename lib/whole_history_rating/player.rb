@@ -234,7 +234,6 @@ module WholeHistoryRating
     def add_game(game)
       if days.last.nil? || days.last.day != game.day
         new_pday = PlayerDay.new(self, game.day)
-        new_pday.date = game.date
         if days.empty?
           new_pday.is_first_day = true
           new_pday.gamma = 1

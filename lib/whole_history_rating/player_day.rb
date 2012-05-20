@@ -1,7 +1,7 @@
 
 module WholeHistoryRating
   class PlayerDay
-    attr_accessor :won_games, :lost_games, :name, :day, :date, :player, :r, :is_first_day, :uncertainty
+    attr_accessor :won_games, :lost_games, :name, :day, :player, :r, :is_first_day, :uncertainty
     def initialize(player, day)
       @day = day
       @player = player

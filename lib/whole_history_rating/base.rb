@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'date'
 
 module WholeHistoryRating
 
@@ -14,7 +13,6 @@ module WholeHistoryRating
       @config[:w2] ||= 300.0  # elo^2
       @games = []
       @players = {}
-      @start_date = nil
     end
   
     def print_ordered_ratings
@@ -40,26 +38,22 @@ module WholeHistoryRating
       players[name] || players[name] = Player.new(name, @config)
     end
     
-    def create_game(options)
-      %w(date white black winner).each do |attr|
-        if options[attr].nil?
-          raise "Invalid game (missing #{attr}): #{options.inspect}"
-        end
-      end
+    def ratings_for_player(name)
+      player = player_by_name(name)
+      player.days.map {|d| [d.day, d.elo.round, (d.uncertainty*100).round]}
+    end
+    
+    def create_game(black, white, winner, time_step, handicap, extras = {})
           
       # Avoid self-played games (no info)
-      if options['white'] == options['black']
-        raise "Invalid game (black player == white player): #{options.inspect}"
+      if black == white
+        raise "Invalid game (black player == white player)"
         return nil
       end
     
-      @start_date ||= options['date']
-      day_num = (options['date'] - @start_date).to_i
-    
-      white_player = player_by_name(options['white'])
-      black_player = player_by_name(options['black'])
-      game = Game.new(day_num, white_player, black_player, options['winner'], options['handicap'], options['extras'])
-      game.date = options['date']
+      white_player = player_by_name(white)
+      black_player = player_by_name(black)
+      game = Game.new(black_player, white_player, winner, time_step, handicap, extras)
       game
     end
   
@@ -71,6 +65,13 @@ module WholeHistoryRating
       end
       @games << game
       game
+    end
+    
+    def iterate(count)
+      count.times { run_one_iteration }
+      players.each do |name,player|
+        player.update_uncertainty
+      end     
     end
   
     def run_one_iteration
