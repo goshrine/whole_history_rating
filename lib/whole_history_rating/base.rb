@@ -2,9 +2,9 @@
 
 module WholeHistoryRating
 
+  class UnstableRatingException < RuntimeError; end
+
   class Base
-  
-    class UnstableRatingException < RuntimeError; end
   
     attr_accessor :players, :games
     
