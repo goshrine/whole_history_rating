@@ -146,7 +146,7 @@ module WholeHistoryRating
     
       new_r.each do |r|
         if r > 650
-          raise WHR::UnstableRatingException, "Unstable r (#{new_r}) on player #{inspect}"
+          raise UnstableRatingException, "Unstable r (#{new_r}) on player #{inspect}"
         end
       end
     

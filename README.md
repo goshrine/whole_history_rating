@@ -1,4 +1,3 @@
-
 # Whole History Rating
 
 A system for ranking game players by skill, based on Rémi Coulom's [Whole History Rating](http://remi.coulom.free.fr/WHR/WHR.pdf) algorithm, with modifications to support handicaps.
@@ -19,6 +18,7 @@ Usage
     @whr = WholeHistoryRating::Base.new
     
     # WholeHistoryRating::Base#create_game arguments: black player name, white player name, winner, day number, handicap
+    # Handicap should generally be less than 500 elo
     @whr.create_game("shusaku", "shusai", "B", 1, 0)
     @whr.create_game("shusaku", "shusai", "W", 2, 0)
     @whr.create_game("shusaku", "shusai", "W", 3, 0)
@@ -36,9 +36,17 @@ Usage
        [2, 45, 84], 
        [3, 45, 84]]
 
-Enjoy!
 
--Pete
+
+Optional Configuration
+----------------------
+
+One of the meta parameters to WHR is the variance of rating change over one time step, :w2,
+which determines how much that a player's rating is likely change in one day.  Higher numbers allow for faster progress.
+The default value is 300, which is fairly high.
+
+    @whr = WholeHistoryRating::Base.new(:w2 => 17)
+    
 
 
 

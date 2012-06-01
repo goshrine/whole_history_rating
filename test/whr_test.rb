@@ -60,5 +60,19 @@ class WholeHistoryRatingTest < Test::Unit::TestCase
     assert_equal [[1, -92, 71], [2, -94, 71], [3, -95, 71], [4, -96, 72]], @whr.ratings_for_player("shusaku")
     assert_equal [[1, 92, 71], [2, 94, 71], [3, 95, 71], [4, 96, 72]], @whr.ratings_for_player("shusai")
   end
+  
+  def test_unstable_exception_raised_in_certain_cases
+    for game in (1..10) do
+       @whr.create_game("anchor", "player", "B", 1, 0)
+       @whr.create_game("anchor", "player", "W", 1, 0)
+    end
+    for game in (1..10) do
+       @whr.create_game("anchor", "player", "B",180, 600)
+       @whr.create_game("anchor", "player", "W",180, 600)
+    end
+    assert_raises WholeHistoryRating::UnstableRatingException do
+      @whr.iterate(10)
+    end
+  end
 end
 

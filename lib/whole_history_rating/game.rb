@@ -25,7 +25,7 @@ module WholeHistoryRating
       end
       rval = 10**(opponent_elo/400.0)
       if rval == 0 || rval.infinite? || rval.nan?
-        raise WHR::UnstableRatingException, "bad adjusted gamma: #{inspect}"
+        raise UnstableRatingException, "bad adjusted gamma: #{inspect}"
       end
       rval
     end
