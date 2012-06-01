@@ -224,7 +224,7 @@ module WholeHistoryRating
     def update_uncertainty
       if days.count > 0
         c = covariance
-        u = (0..(days.count-1)).collect{|i| c[i,i]}
+        u = (0..(days.count-1)).collect{|i| c[i,i]} # u = variance
         days.zip(u) {|d,u| d.uncertainty = u}
       else
         5
